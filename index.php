@@ -91,15 +91,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
 }
 ?>
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Estteban & Maria | Invitacion de boda</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Estteban & Maria – Wedding Template is perfect for wedding planners, coordinators, photographers, and event organizers. Minimal, clean, responsive and SEO friendly design with Bootstrap 5+, video background, working contact form, and retina-ready layout.">
-    <meta name="keywords" content="wedding template, wedding planner, wedding website, event organizer, wedding coordinator, wedding photographer, modern wedding template, bootstrap wedding theme, responsive wedding template, minimal wedding design">
-    <meta name="author" content="DuruThemes">
+    <meta name="description" content="Invitacion de boda de Estteban y Maria. 22 de noviembre de 2026 en Finca La Ruca, San Lucas Sacatepequez.">
+    <meta name="keywords" content="boda Estteban Maria, invitacion de boda, RSVP boda">
+    <meta name="author" content="Estteban y Maria">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <link rel="stylesheet" href="css/animate.css">
@@ -124,29 +124,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
         <aside id="oliven-aside">
             <!-- Logo -->
             <div class="oliven-logo">
-                <a href="index.html"> <img src="images/logo.png" alt=""> <span>Estteban <small>&</small> Maria</span>
-                    <h6>15.11.2026</h6>
+                <a href="#home"> <img src="images/logo.png" alt=""> <span>Estteban <small>&</small> Maria</span>
+                    <h6>22.11.2026</h6>
                 </a>
             </div>
             <!-- Menu -->
             <nav class="oliven-main-menu">
                 <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#couple">Couple</a></li>
-                    <li><a href="index.html#story">Nuestra historia</a></li>
-                    <li><a href="index.html#friends">Friends</a></li>
-                    <li><a href="index.html#organization">Organization</a></li>
-                    <li><a href="index.html#gallery">Gallery</a></li>
-                    <li><a href="index.html#whenwhere">When & Where</a></li>
-                    <li><a href="index.html#rsvp">R.S.V.P</a></li>
-                    <li><a href="index.html#gift">Regalos</a></li>
-                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#couple">Los novios</a></li>
+                    <li><a href="#story">Invitacion</a></li>
+                    <li><a href="#whenwhere">Cuando y donde</a></li>
+                    <li><a href="#rsvp">R.S.V.P</a></li>
+                    <li><a href="#gift">Regalos</a></li>
                 </ul>
             </nav>
             <!-- Sidebar Footer -->
             <div class="footer1"> <span class="separator"></span>
                 <p>Boda de Estteban y Maria
-                    <br />Fecha por confirmar
+                    <br />22 de noviembre de 2026
                 </p>
             </div>
         </aside>
@@ -166,14 +162,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                         <div class="row">
                             <div class="col-md-12">
                                 <h1>Estteban & Maria</h1>
-                                <h5>Fecha por confirmar</h5>
+                                <h5>22 de noviembre de 2026 - Finca La Ruca</h5>
                             </div>
                         </div>
                         <!-- scroll down -->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="arrow bounce text-center">
-                                    <a href="index.html#couple"> <i class="ti-heart"></i> </a>
+                                    <a href="#couple"> <i class="ti-heart"></i> </a>
                                 </div>
                             </div>
                         </div>
@@ -190,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                                 <div class="info valign">
                                     <div class="full-width">
                                         <h6>Maria <i class="ti-heart"></i></h6> <span>La novia</span>
-                                        <p>Olivia fringilla dui at elit finibus viverra thenec a lacus seda themo the miss druane semper non the fermen.</p>
+                                        <p>Con mucha alegria celebra este paso tan especial junto a Estteban, rodeada de las personas que han sido parte de su historia.</p>
                                         <div class="social">
                                             <div class="full-width">
                                                 <a href="#0" class="icon"> <i class="ti-facebook"></i> </a>
@@ -208,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                                 <div class="info valign">
                                     <div class="full-width">
                                         <h6>Estteban <i class="ti-heart"></i></h6> <span>El novio</span>
-                                        <p>Enrico fringilla dui at elit finibus viverra thenec a lacus seda themo the miss druane semper non the fermen.</p>
+                                        <p>Con gratitud y emocion comparte este dia con Maria, agradeciendo a Dios por guiarlos hasta este momento.</p>
                                         <div class="social">
                                             <div class="full-width">
                                                 <a href="#0" class="icon"> <i class="ti-facebook"></i> </a>
@@ -224,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                     <div class="row">
                         <div class="col-md-12 text-center animate-box" data-animate-effect="fadeInUp">
                             <h3 class="oliven-couple-title">Nos casamos!</h3>
-                            <h4 class="oliven-couple-subtitle">Fecha y lugar por confirmar</h4>
+                            <h4 class="oliven-couple-subtitle">22 de noviembre de 2026 - San Lucas Sacatepequez</h4>
                         </div>
                     </div>
                 </div>
@@ -234,16 +230,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 <div class="container">
                     <div class="row">
                         <div class="section-head col-md-12">
-                            <h4>We will become a family in</h4>
+                            <h4>Falta para celebrar juntos</h4>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <ul>
-                                <li><span id="days"></span>Days</li>
-                                <li><span id="hours"></span>Hours</li>
-                                <li><span id="minutes"></span>Minutes</li>
-                                <li><span id="seconds"></span>Seconds</li>
+                                <li><span id="days"></span>Dias</li>
+                                <li><span id="hours"></span>Horas</li>
+                                <li><span id="minutes"></span>Minutos</li>
+                                <li><span id="seconds"></span>Segundos</li>
                             </ul>
                         </div>
                     </div>
@@ -260,19 +256,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                             </div>
                         </div>
                         <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
-                            <h4 class="oliven-story-subtitle">Nuestro amor.</h4>
-                            <h3 class="oliven-story-title">Nuestra historia</h3>
-                            <p>Curabit aliquet orci elit genes tristique lorem commodo vitae. Tuliaum tincidunt nete sede gravida aliquam, neque libero hendrerit magna, sit amet mollis lacus ithe maurise. Dunya erat volutpat edat themo the druanye semper.</p>
-                            <p>Luality fringilla duiman at elit vinibus viverra nec a lacus themo the druanye sene sollicitudin mi suscipit non sagie the fermen.</p>
-                            <p>Phasellus viverra tristique justo duis vitae diam neque nivamus ac est augue artine aringilla dui at elit finibus viverra nec a lacus. Nedana themo eros odio semper soe suscipit non. Curabit aliquet orci elit genes tristique.</p>
-                            <h4>Dec 5th, 2026, We Said Yes!</h4>
-                            <p>Luality fringilla duiman at elit finibus viverra nec a lacus themo the druanye sene sollicitudin mi suscipit non sagie the fermen.</p>
+                            <h4 class="oliven-story-subtitle">Por todas las veces que nos preguntaron:</h4>
+                            <h3 class="oliven-story-title">"Y pa' cuando?"</h3>
+                            <p>Pues ya! Nos alegra contarles que ya tenemos respuesta.</p>
+                            <p>Dios ha sido bueno con nosotros y nos ha guiado hasta este momento. Por eso, con mucha alegria, queremos invitarlos a acompanarnos el dia en que uniremos nuestras vidas delante de Dios.</p>
+                            <p>Y como ninguna historia se celebra igual sin las personas que han sido parte de ella, nos encantara compartir este momento con ustedes.</p>
+                            <h4>"Y sobre todas estas cosas vestios de amor, que es el vinculo perfecto."</h4>
+                            <p>Colosenses 3:14</p>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Friends -->
-            <div id="friends" class="friends section-padding bg-pink">
+            <div id="friends" class="friends section-padding bg-pink" style="display: none;">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mb-30"> <span class="oliven-title-meta">Our best friends ever</span>
@@ -346,14 +342,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 <div class="container">
                     <div class="row">
                         <div class="section-head col-md-12 text-center"> <span><i class="ti-heart"></i></span>
-                            <h4>Looking forward to see you!</h4>
-                            <h3>15.11.2026</h3>
+                            <h4>Esperamos compartir este dia contigo</h4>
+                            <h3>22.11.2026</h3>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Organization -->
-            <div id="organization" class="organization section-padding bg-pink">
+            <div id="organization" class="organization section-padding bg-pink" style="display: none;">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mb-30"> <span class="oliven-title-meta">Wedding</span>
@@ -385,7 +381,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 </div>
             </div>
             <!-- Gallery -->
-            <div id="gallery" class="section-padding">
+            <div id="gallery" class="section-padding" style="display: none;">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mb-30"> <span class="oliven-title-meta">Gallery</span>
@@ -469,8 +465,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
             <div id="whenwhere" class="whenwhere section-padding bg-pink">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12 mb-30"> <span class="oliven-title-meta">Questions</span>
-                            <h2 class="oliven-title">When & Where</h2>
+                        <div class="col-md-12 mb-30"> <span class="oliven-title-meta">Detalles</span>
+                            <h2 class="oliven-title">Cuando y donde</h2>
                         </div>
                     </div>
                     <div class="row">
@@ -479,25 +475,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                                 <div class="item">
                                     <div class="whenwhere-img"> <img src="images/whenwhere/3.jpg" alt=""></div>
                                     <div class="content">
-                                        <h5>Wedding Ceremony</h5>
-                                        <p><i class="ti-location-pin"></i> 175 Broadway, Brooklyn, New York 11244, USA</p>
-                                        <p><i class="ti-time"></i> <span>12:00am – 13:00pm</span></p>
+                                        <h5>Ceremonia</h5>
+                                        <p><i class="ti-location-pin"></i> Finca La Ruca, San Lucas Sacatepequez</p>
+                                        <p><i class="ti-time"></i> <span>3:00 PM</span></p>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="whenwhere-img"> <img src="images/whenwhere/1.jpg" alt=""></div>
                                     <div class="content">
-                                        <h5>Weddding Party</h5>
-                                        <p><i class="ti-location-pin"></i> Fortune Brooklyn restaurant, 149 Broadway, Brooklyn, NY, USA</p>
-                                        <p><i class="ti-time"></i> <span>14:00pm</span></p>
+                                        <h5>Recepcion</h5>
+                                        <p><i class="ti-location-pin"></i> Finca La Ruca, San Lucas Sacatepequez</p>
+                                        <p><i class="ti-time"></i> <span>5:00 PM</span></p>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="whenwhere-img"> <img src="images/whenwhere/2.jpg" alt=""></div>
                                     <div class="content">
-                                        <h5>Accomodations</h5>
-                                        <p><i class="ti-direction-alt"></i> Hotel and distance from wedding party restaurant:</p>
-                                        <p><i class="ti-direction"></i> The William Vale (7 min)</p>
+                                        <h5>Importante</h5>
+                                        <p><i class="ti-heart"></i> Recepcion solo para adultos.</p>
+                                        <p><i class="ti-check"></i> Codigo de vestimenta formal. La boda sera en jardin; San Lucas en noviembre puede ponerse frio, asi que trae algo para abrigarte. Los tenis tambien son bienvenidos.</p>
                                     </div>
                                 </div>
                             </div>
@@ -591,31 +587,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
             <div id="gift" class="gift-section gift">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 mb-30">
-                            <br> <span class="oliven-title-meta">Gift</span>
+                        <div class="col-md-4 mb-30">
+                            <br> <span class="oliven-title-meta">Con carino</span>
                             <h2 class="oliven-title">Regalos</h2>
                         </div>
-                        <div class="col-md-9">
-                            <div class="owl-carousel owl-theme">
-                                <div class="client-logo">
-                                    <a href="#"><img src="images/gift/1.jpg" alt=""></a>
-                                </div>
-                                <div class="client-logo">
-                                    <a href="#"><img src="images/gift/2.jpg" alt=""></a>
-                                </div>
-                                <div class="client-logo">
-                                    <a href="#"><img src="images/gift/3.jpg" alt=""></a>
-                                </div>
-                                <div class="client-logo">
-                                    <a href="#"><img src="images/gift/4.jpg" alt=""></a>
-                                </div>
-                                <div class="client-logo">
-                                    <a href="#"><img src="images/gift/5.jpg" alt=""></a>
-                                </div>
-                                <div class="client-logo">
-                                    <a href="#"><img src="images/gift/6.jpg" alt=""></a>
-                                </div>
-                            </div>
+                        <div class="col-md-8">
+                            <p>Su presencia sera nuestro mejor regalo.</p>
+                            <p>Sin embargo, si desean bendecirnos de una manera adicional, tendremos la opcion de transferencia bancaria o sobres el dia del evento.</p>
+                            <p>Esperamos compartir con ustedes una tarde llena de amor, alegria, buena comida y muchos recuerdos inolvidables.</p>
+                            <p><strong>Con carino,<br>Estteban & Maria</strong></p>
                         </div>
                     </div>
                 </div>
@@ -626,9 +606,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <h2>
-                                <a href="index.html"><img src="images/logo.png" alt=""><span>Estteban <small>&</small> Maria</span></a>
+                                <a href="#home"><img src="images/logo.png" alt=""><span>Estteban <small>&</small> Maria</span></a>
                             </h2>
-                            <p class="copyright">Fecha y lugar por confirmar</p>
+                            <p class="copyright">22 de noviembre de 2026 - Finca La Ruca, San Lucas Sacatepequez</p>
                         </div>
                     </div>
                 </div>

@@ -288,7 +288,7 @@
             minute = second * 60,
             hour = minute * 60,
             day = hour * 24;
-      let weddingDate = "Dec 15, 2026 00:00:00",
+      let weddingDate = "Nov 22, 2026 15:00:00",
           countDown = new Date(weddingDate).getTime();
       let x = setInterval(function() {    
         let now = new Date().getTime(),
@@ -299,7 +299,7 @@
         document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
         // What to do when the date passes
         if (distance < 0) {
-          document.getElementById("headline").innerText = "It's wedding time!";
+          document.getElementById("headline").innerText = "Es el dia de la boda!";
           document.getElementById("countdown").style.display = "none";
           document.getElementById("content").style.display = "block";
           clearInterval(x);

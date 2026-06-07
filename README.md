@@ -27,7 +27,7 @@ define('DB_PASS', 'CONTRASENA_DEL_USUARIO');
 define('SITE_URL', 'https://bodaesttebanymaria.com');
 define('ADMIN_PASSWORD', 'CONTRASENA_DEL_PANEL');
 define('ADMIN_EMAIL', 'correo-para-notificaciones@example.com');
-define('MAIL_FROM', 'notificaciones@bodaesttebanymaria.com');
+define('MAIL_FROM', 'noreply@bodaesttebanymaria.com');
 ```
 
 ## Uso
@@ -39,5 +39,4 @@ define('MAIL_FROM', 'notificaciones@bodaesttebanymaria.com');
 
 ## Pendiente de personalizacion
 
-Falta reemplazar los textos, fecha, ubicacion, fotos y videos definitivos cuando esten listos.
-
+Falta reemplazar fotos y videos definitivos cuando esten listos.
