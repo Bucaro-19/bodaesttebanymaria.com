@@ -9,16 +9,22 @@ $invitado = null;
 $form_message = '';
 $form_status = '';
 
-if ($token_url !== '') {
+if ($token_url !== '' && DB_AVAILABLE) {
     $stmt = $conn->prepare('SELECT id, nombre, token, pases, telefono, email, asiste, cantidad_asistentes, mensaje, restricciones_alimenticias, cancion FROM invitados WHERE token = ? LIMIT 1');
     $stmt->bind_param('s', $token_url);
     $stmt->execute();
     $invitado = $stmt->get_result()->fetch_assoc();
     $stmt->close();
+} elseif ($token_url !== '') {
+    $form_status = 'warning';
+    $form_message = 'Vista local sin conexion a base de datos. La invitacion se puede revisar, pero el RSVP necesita MySQL.';
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confirm_rsvp') {
-    if (!$invitado) {
+    if (!DB_AVAILABLE) {
+        $form_status = 'danger';
+        $form_message = 'No hay conexion a la base de datos. En el hosting funcionara cuando config.php este instalado y la BD exista.';
+    } elseif (!$invitado) {
         $form_status = 'danger';
         $form_message = 'Este enlace no es valido. Por favor confirma desde tu invitacion personalizada.';
     } else {

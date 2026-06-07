@@ -11,10 +11,16 @@ define('ADMIN_PASSWORD', 'CAMBIA_ESTA_CONTRASENA_ADMIN');
 define('ADMIN_EMAIL', 'tu-correo@example.com');
 define('MAIL_FROM', 'noreply@bodaesttebanymaria.com');
 
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+mysqli_report(MYSQLI_REPORT_OFF);
+
+$conn = @new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$db_error = '';
+
 if ($conn->connect_error) {
-    http_response_code(500);
-    die('Error de conexion a la base de datos.');
+    $db_error = $conn->connect_error;
+    $conn = null;
+} else {
+    $conn->set_charset('utf8mb4');
 }
 
-$conn->set_charset('utf8mb4');
+define('DB_AVAILABLE', $conn instanceof mysqli);

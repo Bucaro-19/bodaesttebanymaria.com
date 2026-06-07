@@ -53,6 +53,32 @@ if (!($_SESSION['admin_logged_in'] ?? false)) {
     exit;
 }
 
+if (!DB_AVAILABLE) {
+    ?>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin | Boda</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="min-h-screen bg-stone-100 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-lg max-w-xl w-full p-8">
+            <p class="text-sm uppercase tracking-widest text-stone-500 mb-2">Panel de invitados</p>
+            <h1 class="text-2xl font-bold text-stone-900 mb-4">Sin conexion a la base de datos</h1>
+            <p class="text-stone-700 mb-4">La invitacion puede verse localmente, pero el panel necesita MySQL para crear invitados y guardar respuestas.</p>
+            <div class="bg-amber-50 border border-amber-200 text-amber-900 rounded-md p-4 text-sm">
+                <strong>Detalle tecnico:</strong> <?php echo h($db_error ?? 'No disponible'); ?>
+            </div>
+            <a href="?logout=1" class="inline-flex mt-6 bg-stone-900 hover:bg-stone-800 text-white rounded-md px-5 py-2 font-semibold">Cerrar sesion</a>
+        </div>
+    </body>
+    </html>
+    <?php
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = (string)($_POST['action'] ?? '');
 
@@ -341,4 +367,3 @@ $guest_result = $conn->query('SELECT * FROM invitados ORDER BY asiste IS NULL DE
     </div>
 </body>
 </html>
-
