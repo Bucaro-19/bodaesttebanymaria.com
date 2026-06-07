@@ -37,6 +37,32 @@ define('MAIL_FROM', 'noreply@bodaesttebanymaria.com');
 3. Usa el boton **Copiar** para generar el mensaje con URL personalizada.
 4. Cuando el invitado confirme, la respuesta queda guardada en `invitados` y se registra una copia en `rsvp_historial`.
 
+## Deploy con GitHub Actions
+
+El repositorio incluye `.github/workflows/deploy.yml`. Cada push a `main` sube los archivos por FTP usando estos secrets del repositorio:
+
+- `FTP_SERVER`
+- `FTP_USERNAME`
+- `FTP_PASSWORD`
+
+El workflow no sube `config.php` porque contiene credenciales privadas. Crea ese archivo una vez en el hosting usando `config.example.php` como plantilla.
+
+Si el usuario FTP entra directo a `public_html`, deja `server-dir: ./`. Si entra al home de cPanel, cambia esa linea por:
+
+```yaml
+server-dir: public_html/
+```
+
+## Vista local
+
+No abras `index.html`; el proyecto real usa `index.php`. Para verlo localmente, usa un servidor PHP desde la carpeta del proyecto:
+
+```bash
+php -S localhost:8000
+```
+
+Despues abre `http://localhost:8000/index.php`. Para probar el formulario necesitas una base de datos accesible y un token creado desde `/admin.php`.
+
 ## Pendiente de personalizacion
 
 Falta reemplazar fotos y videos definitivos cuando esten listos.
