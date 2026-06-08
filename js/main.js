@@ -134,7 +134,7 @@
     
     // When & Where owlCarousel
     $('.whenwhere .owl-carousel').owlCarousel({
-        loop: true
+        loop: window.innerWidth < 769
         , margin: 30
         , mouseDrag: true
         , autoplay: false
@@ -147,8 +147,11 @@
             , 600: {
                 items: 1
             }
+            , 769: {
+                items: 2
+            }
             , 1000: {
-                items: 3
+                items: 2
             }
         }
     });
