@@ -1,4 +1,6 @@
 .DS_Store
 config.php
 *.log
-
+medios/*
+!medios/web/
+!medios/web/**

@@ -159,8 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
                 <div class="video-fullscreen-video" data-overlay-dark="5">
                     <video playsinline="" autoplay="" loop="" muted="">
-                        <source src="https://duruthemes.com/demo/html/olivia-enrico/video.mp4" type="video/mp4" autoplay="" loop="" muted="">
-                        <source src="https://duruthemes.com/demo/html/olivia-enrico/video.webm" type="video/webm" autoplay="" loop="" muted="">
+                        <source src="medios/web/video-chatayestteban.mp4" type="video/mp4" autoplay="" loop="" muted="">
                     </video>
                 </div>
                 <div class="v-middle caption overlay">
@@ -194,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 </div>
             </div>
             <!-- Countdown -->
-            <div id="countdown" class="section-padding bg-img bg-fixed" data-background="images/banner-1.jpg">
+            <div id="countdown" class="section-padding bg-img bg-fixed" data-background="medios/web/contador.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="section-head col-md-12">
@@ -219,16 +218,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                     <div class="row">
                         <div class="col-md-5 mb-30">
                             <div class="story-img animate-box" data-animate-effect="fadeInLeft">
-                                <div class="img"> <img src="images/story.jpg" class="img-fluid" alt=""> </div>
+                                <div class="img"> <img src="medios/web/pareja.jpg" class="img-fluid" alt="Estteban y María"> </div>
                                 <div class="story-img-2 story-wedding" style="background-image: url(images/wedding-logo.png);"></div>
                             </div>
                         </div>
                         <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
-                            <h4 class="oliven-story-subtitle">Por todas las veces que nos preguntaron:</h4>
-                            <h3 class="oliven-story-title">"¿Y pa' cuándo?"</h3>
-                            <p>¡Pues ya! Nos alegra contarles que ya tenemos respuesta.</p>
+                            <h3 class="oliven-story-title">Por todas las veces que nos preguntaron:<br>"¿Y pa' cuándo?"<br>¡Pues ya! Nos alegra contarles que ya tenemos respuesta.</h3>
                             <p>Dios ha sido bueno con nosotros y nos ha guiado hasta este momento. Por eso, con mucha alegría, queremos invitarlos a acompañarnos el día en que uniremos nuestras vidas delante de Dios.</p>
                             <p>Y como ninguna historia se celebra igual sin las personas que han sido parte de ella, nos encantará compartir este momento con ustedes.</p>
+                            <p><strong>Recepción solo para adultos.</strong> Aunque queremos mucho a los pequeños de la familia, en esta ocasión la celebración será exclusivamente para adultos. Gracias por comprender y por acompañarnos en este día tan especial.</p>
+                            <p><strong>Código de vestimenta: formal.</strong> La boda será en jardín y San Lucas en noviembre tiene fama de ponerse frío, así que no olviden traer algo para abrigarse. Y aunque el código de vestimenta es formal, creemos firmemente que nadie debería sufrir por unos zapatos incómodos. Los tenis también son bienvenidos.</p>
                             <h4>"Y sobre todas estas cosas vestíos de amor, que es el vínculo perfecto."</h4>
                             <p>Colosenses 3:14</p>
                         </div>
@@ -306,7 +305,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 </div>
             </div>
             <!-- See you -->
-            <div id="seeyou" class="seeyou section-padding bg-img bg-fixed" data-background="images/banner-3.jpg">
+            <div id="seeyou" class="seeyou section-padding bg-img bg-fixed" data-background="medios/web/ambiente.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="section-head col-md-12 text-center"> <span><i class="ti-heart"></i></span>
@@ -441,7 +440,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                         <div class="col-md-12">
                             <div class="owl-carousel owl-theme">
                                 <div class="item">
-                                    <div class="whenwhere-img"> <img src="images/whenwhere/3.jpg" alt=""></div>
+                                    <div class="whenwhere-img"> <img src="medios/web/ceremonia.jpg" alt="Ceremonia"></div>
                                     <div class="content">
                                         <h5>Ceremonia</h5>
                                         <p><i class="ti-location-pin"></i> Finca La Ruca, San Lucas Sacatepéquez</p>
@@ -449,19 +448,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <div class="whenwhere-img"> <img src="images/whenwhere/1.jpg" alt=""></div>
+                                    <div class="whenwhere-img"> <img src="medios/web/recepcion.jpg" alt="Recepción"></div>
                                     <div class="content">
                                         <h5>Recepción</h5>
                                         <p><i class="ti-location-pin"></i> Finca La Ruca, San Lucas Sacatepéquez</p>
                                         <p><i class="ti-time"></i> <span>5:00 PM</span></p>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="whenwhere-img"> <img src="images/whenwhere/2.jpg" alt=""></div>
-                                    <div class="content">
-                                        <h5>Importante</h5>
-                                        <p><i class="ti-heart"></i> Recepción solo para adultos.</p>
-                                        <p><i class="ti-check"></i> Código de vestimenta: formal. La boda será en jardín; San Lucas en noviembre puede ponerse frío, así que trae algo para abrigarte. Los tenis también son bienvenidos.</p>
                                     </div>
                                 </div>
                             </div>
