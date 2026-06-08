@@ -1023,6 +1023,11 @@ body.offcanvason .oliven-nav-toggle {
 .video-fullscreen-wrap .wedding-video video {
   object-position: 50% 50%;
 }
+@media screen and (max-width: 768px) {
+  .video-fullscreen-wrap .wedding-video video {
+    object-position: 58% 50%;
+  }
+}
 .video-fullscreen-wrap .video-fullscreen-inner {
   position: absolute;
   top: 0;
