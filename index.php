@@ -130,8 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
         <aside id="oliven-aside">
             <!-- Logo -->
             <div class="oliven-logo">
-                <a href="#home"> <img src="images/logo.png" alt=""> <span>Estteban <small>&</small> María</span>
-                    <h6>22.11.2026</h6>
+                <a href="#home">
+                    <img src="medios/web/logo.png" alt="Estteban y María">
                 </a>
             </div>
             <!-- Menu -->
@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
             <!-- Header Video -->
             <header id="home" class="video-fullscreen-wrap position-relative">
                 <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
-                <div class="video-fullscreen-video" data-overlay-dark="5">
+                <div class="video-fullscreen-video wedding-video" data-overlay-dark="7">
                     <video playsinline="" autoplay="" loop="" muted="">
                         <source src="medios/web/video-chatayestteban.mp4" type="video/mp4" autoplay="" loop="" muted="">
                     </video>

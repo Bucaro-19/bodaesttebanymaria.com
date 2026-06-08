@@ -583,7 +583,9 @@ input[type=radio]:checked:before {
     margin-bottom: 5px;
 }
 #oliven-aside .oliven-logo img {
-    width: 90px;
+    width: 220px;
+    max-width: 90%;
+    height: auto;
     margin-bottom: 0px;
 }
 @media screen and (max-width: 768px) {
@@ -997,14 +999,29 @@ body.offcanvason .oliven-nav-toggle {
 }
 .video-fullscreen-video {
     height: 100%;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+.video-fullscreen-video:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+  z-index: 2;
+  pointer-events: none;
 }
 .video-fullscreen-wrap video {
   width: 100vw;
-  height: auto;
+  height: 100vh;
   min-width: 100%;
   min-height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+  object-position: center center;
+}
+.video-fullscreen-wrap .wedding-video video {
+  object-position: 50% 50%;
 }
 .video-fullscreen-wrap .video-fullscreen-inner {
   position: absolute;
