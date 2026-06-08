@@ -219,7 +219,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                         <div class="col-md-5 mb-30">
                             <div class="story-img animate-box" data-animate-effect="fadeInLeft">
                                 <div class="img"> <img src="medios/web/pareja.jpg" class="img-fluid" alt="Estteban y María"> </div>
-                                <div class="story-img-2 story-wedding" style="background-image: url(images/wedding-logo.png);"></div>
                             </div>
                         </div>
                         <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
