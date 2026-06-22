@@ -86,6 +86,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
                     @mail(ADMIN_EMAIL, $subject, $body, $headers);
                 }
+
+                // Correo de confirmación al invitado (solo si dejó un correo válido)
+                if ($email !== '' && defined('MAIL_FROM') && MAIL_FROM !== '') {
+                    $fecha_evento = 'domingo 22 de noviembre de 2026';
+                    $lugar = 'Finca La Ruca, San Lucas Sacatepéquez';
+                    $waze_url = 'https://ul.waze.com/ul?venue_id=176488594.1765148084.896612&overview=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location';
+                    $maps_url = 'https://www.google.com/maps/search/?api=1&query=14.598513,-90.657937';
+                    $nombre_inv = h($invitado['nombre']);
+                    $estilo_btn = 'padding:12px 22px;border-radius:6px;text-decoration:none;display:inline-block;margin:4px 6px 4px 0;font-weight:bold';
+
+                    if ($asiste === 1) {
+                        $pase_txt = $cantidad === 1 ? '1 pase' : $cantidad . ' pases';
+                        $subj_inv = 'Confirmamos tu asistencia - Boda Estteban y Maria';
+                        $body_inv = '<div style="font-family:Georgia,\'Times New Roman\',serif;max-width:540px;margin:0 auto;color:#3f3f46;line-height:1.6;font-size:16px">'
+                            . '<h2 style="color:#1c1917;font-weight:normal;text-align:center;letter-spacing:2px">Estteban &amp; Maria</h2>'
+                            . '<p>Hola <strong>' . $nombre_inv . '</strong>,</p>'
+                            . '<p>¡Gracias por confirmar tu asistencia! Apartamos <strong>' . $pase_txt . '</strong> para ti.</p>'
+                            . '<p>Te esperamos el <strong>' . $fecha_evento . '</strong>:</p>'
+                            . '<ul style="padding-left:18px">'
+                            . '<li>Ceremonia: <strong>3:00 PM</strong></li>'
+                            . '<li>Recepción: <strong>5:00 PM</strong></li>'
+                            . '<li>Lugar: <strong>' . $lugar . '</strong></li>'
+                            . '</ul>'
+                            . '<p style="text-align:center;margin:28px 0">'
+                            . '<a href="' . $waze_url . '" style="background:#1c1917;color:#ffffff;' . $estilo_btn . '">Abrir en Waze</a>'
+                            . '<a href="' . $maps_url . '" style="background:#57534e;color:#ffffff;' . $estilo_btn . '">Abrir en Google Maps</a>'
+                            . '</p>'
+                            . '<p style="text-align:center;color:#78716c">Con cariño,<br>Estteban y Maria</p>'
+                            . '</div>';
+                    } else {
+                        $subj_inv = 'Recibimos tu respuesta - Boda Estteban y Maria';
+                        $body_inv = '<div style="font-family:Georgia,\'Times New Roman\',serif;max-width:540px;margin:0 auto;color:#3f3f46;line-height:1.6;font-size:16px">'
+                            . '<h2 style="color:#1c1917;font-weight:normal;text-align:center;letter-spacing:2px">Estteban &amp; Maria</h2>'
+                            . '<p>Hola <strong>' . $nombre_inv . '</strong>,</p>'
+                            . '<p>Gracias por avisarnos. Lamentamos que no puedas acompañarnos; te vamos a extrañar.</p>'
+                            . '<p style="text-align:center;color:#78716c">Con cariño,<br>Estteban y Maria</p>'
+                            . '</div>';
+                    }
+
+                    $headers_inv = 'From: Estteban y Maria <' . MAIL_FROM . ">\r\n";
+                    $headers_inv .= "MIME-Version: 1.0\r\n";
+                    $headers_inv .= "Content-Type: text/html; charset=UTF-8\r\n";
+                    if (defined('ADMIN_EMAIL') && ADMIN_EMAIL !== '' && strpos(ADMIN_EMAIL, 'example.com') === false) {
+                        $headers_inv .= 'Reply-To: ' . ADMIN_EMAIL . "\r\n";
+                    }
+                    @mail($email, $subj_inv, $body_inv, $headers_inv);
+                }
             } else {
                 $form_status = 'danger';
                 $form_message = 'No se pudo guardar tu respuesta. Intenta de nuevo en unos minutos.';
