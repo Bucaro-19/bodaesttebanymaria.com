@@ -141,12 +141,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                     }
                     @mail($email, $subj_inv, $body_inv, $headers_inv);
                 }
+
+                // Post/Redirect/Get: al recargar o volver atrás NO se reenvía el formulario.
+                // Evita guardar otra vez y reenviar los correos. La página de éxito es un GET.
+                header('Location: /?invitado=' . rawurlencode($token_url) . '&ok=1#rsvp');
+                exit;
             } else {
                 $form_status = 'danger';
                 $form_message = 'No se pudo guardar tu respuesta. Intenta de nuevo en unos minutos.';
             }
         }
     }
+}
+
+// Página de éxito tras la redirección PRG (?ok=1). Es un GET, así que recargar no reenvía nada.
+$just_saved = isset($_GET['ok']) && $invitado && isset($invitado['asiste']);
+if ($just_saved) {
+    $form_status = 'success';
+    $form_message = 'Gracias, tu respuesta quedó guardada correctamente.';
 }
 ?>
 <!DOCTYPE HTML>
@@ -570,7 +582,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                                     }
                                 }
                                 ?>
-                                <?php if ($ya_respondio && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
+                                <?php if ($ya_respondio && !$just_saved && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
                                     <?php
                                     $cant = (int)($invitado['cantidad_asistentes'] ?? 0);
                                     if ((int)$invitado['asiste'] === 1) {
