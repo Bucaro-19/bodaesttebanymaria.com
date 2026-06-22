@@ -225,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                             <div class="story-editorial">
                                 <p class="se-leadin">Por todas las veces que nos preguntaron</p>
                                 <div class="se-script">¿Y pa' cuándo?</div>
-                                <p class="se-answer">¡Pues ya! Nos alegra contarles que ya tenemos respuesta.</p>
+                                <p class="se-answer">¡Pues ya! Nos alegra contarles que llego el momento de responder esa pregunta.</p>
 
                                 <p class="se-body">Dios ha sido bueno con nosotros y nos ha guiado hasta este momento. Por eso, con mucha alegría, queremos invitarlos a acompañarnos el día en que uniremos nuestras vidas delante de Dios.</p>
                                 <p class="se-body">Y como ninguna historia se celebra igual sin las personas que han sido parte de ella, nos encantará compartir este momento con ustedes.</p>

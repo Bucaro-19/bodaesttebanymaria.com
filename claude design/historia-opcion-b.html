@@ -1,0 +1,178 @@
+<!--
+============================================================
+  Sección "Nuestra historia" — Opción B (Acento editorial)
+  Para: index.php  ·  Boda Estteban & María
+============================================================
+
+CÓMO IMPLEMENTARLO (instrucciones para Codex):
+
+1) En index.php, dentro de  <div id="story" class="story section-padding">,
+   REEMPLAZA todo el contenido de la columna de texto:
+
+       <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
+           ...  (h3.oliven-story-title, los <p>, el <h4> del versículo, etc.)
+       </div>
+
+   por el BLOQUE HTML de abajo (la sección marcada como "HTML A PEGAR").
+   La columna de la foto (col-md-5) se queda igual.
+
+2) Pega el BLOQUE CSS de abajo al final de css/style.css
+   (o dentro de un <style> en el <head>). Va con scope en
+   ".story-editorial", así que no afecta nada más.
+
+3) Las fuentes (Cormorant Garamond, Alex Brush, Nunito Sans) ya las
+   carga style.css con @import, no hay que añadir nada.
+
+Este archivo se puede abrir en el navegador para ver el resultado.
+============================================================
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nuestra historia — Opción B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- ===================== BLOQUE CSS A PEGAR ===================== -->
+<style>
+.story-editorial { max-width: 480px; }
+
+.story-editorial .se-leadin {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 1.4;
+  text-align: center;
+  margin: 0;
+}
+.story-editorial .se-script {
+  font-family: 'Alex Brush', cursive;
+  color: #BD945A;
+  font-size: 54px;
+  line-height: 1.05;
+  text-align: center;
+  margin: 14px 0 0;
+  padding-bottom: 10px;
+}
+.story-editorial .se-answer {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 1.4;
+  text-align: center;
+  margin: 6px 0 0;
+}
+.story-editorial .se-body {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.85;
+  color: #7c7c7c;
+  margin: 26px 0 18px;
+}
+.story-editorial .se-body + .se-body { margin-top: 0; }
+.story-editorial .se-details {
+  border-top: 1px solid #efe7df;
+  margin: 22px 0;
+  padding-top: 20px;
+}
+.story-editorial .se-details p {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.85;
+  color: #7c7c7c;
+  margin: 0 0 16px;
+}
+.story-editorial .se-details p:last-child { margin-bottom: 0; }
+.story-editorial .se-label {
+  color: #BD945A;
+  font-weight: 700;
+  display: block;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+/* Panel del versículo */
+.story-editorial .se-verse {
+  background: #faf6f2;
+  padding: 38px 40px 42px;
+  margin-top: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.story-editorial .se-verse .se-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 14px;
+  width: 80px;
+  height: 56px;
+  background-image: radial-gradient(#BD945A 1.3px, transparent 1.3px);
+  background-size: 11px 11px;
+  opacity: .3;
+}
+.story-editorial .se-verse svg { display: block; margin: 0 auto 16px; position: relative; overflow: visible; }
+.story-editorial .se-verse p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 25px;
+  line-height: 1.5;
+  color: #1a1a1a;
+  margin: 0;
+  position: relative;
+}
+.story-editorial .se-cite {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #BD945A;
+  margin-top: 16px;
+  position: relative;
+}
+</style>
+<style>
+  /* solo para esta vista de previsualización; NO copiar a index.php */
+  body { background:#fff; margin:0; padding:50px 24px; font-family:'Nunito Sans',sans-serif; display:flex; justify-content:center; }
+</style>
+</head>
+<body>
+
+<!-- ===================== HTML A PEGAR ===================== -->
+<!-- Va dentro de: <div class="col-md-7 animate-box" data-animate-effect="fadeInRight"> -->
+<div class="story-editorial">
+
+  <p class="se-leadin">Por todas las veces que nos preguntaron</p>
+  <div class="se-script">¿Y pa' cuándo?</div>
+  <p class="se-answer">¡Pues ya! Nos alegra contarles que llegó el momento de responder esa pregunta</p>
+
+  <p class="se-body">Dios ha sido bueno con nosotros y nos ha guiado hasta este momento. Por eso, con mucha alegría, queremos invitarlos a acompañarnos el día en que uniremos nuestras vidas delante de Dios.</p>
+  <p class="se-body">Y como ninguna historia se celebra igual sin las personas que han sido parte de ella, nos encantará compartir este momento con ustedes.</p>
+
+  <div class="se-details">
+    <p><strong class="se-label">Recepción solo para adultos</strong>Aunque queremos mucho a los pequeños de la familia, en esta ocasión la celebración será exclusivamente para adultos. Gracias por comprender y por acompañarnos en este día tan especial.</p>
+    <p><strong class="se-label">Código de vestimenta · Formal</strong>La boda será en jardín y San Lucas en noviembre tiene fama de ponerse frío, así que no olviden traer algo para abrigarse.</p>
+    <p>Y aunque el código es formal, creemos que nadie debería sufrir por unos zapatos incómodos. Los tenis también son bienvenidos.</p>
+  </div>
+
+  <div class="se-verse">
+    <span class="se-dots"></span>
+    <svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#BD945A"/></svg>
+    <p>"Y sobre todas estas cosas vestíos de amor, que es el vínculo perfecto."</p>
+    <div class="se-cite">Colosenses 3:14</div>
+  </div>
+
+</div>
+<!-- ===================== FIN HTML A PEGAR ===================== -->
+
+</body>
+</html>
