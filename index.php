@@ -81,8 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                     $body .= "Cantidad: {$cantidad}\n";
                     $body .= "Teléfono: {$telefono}\n";
                     $body .= "Email: {$email}\n";
-                    $body .= "Restricciones: {$restricciones}\n";
-                    $body .= "Canción: {$cancion}\n";
                     $body .= "Mensaje: {$mensaje}\n";
                     $headers = 'From: ' . MAIL_FROM . "\r\n";
                     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
@@ -474,7 +472,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                     <div class="row mt-5">
                         <div class="col-md-12">
                             <div class="waze-map">
-                                <iframe src="https://embed.waze.com/iframe?zoom=16&lat=14.598513&lon=-90.657937&ct=livemap" width="600" height="450" allowfullscreen loading="lazy"></iframe>
+                                <iframe src="https://embed.waze.com/iframe?zoom=16&lat=14.598513&lon=-90.657937&ct=livemap" width="600" height="450" allowfullscreen></iframe>
+                                <div class="waze-map-pin" aria-hidden="true"><i class="ti-location-pin"></i></div>
+                            </div>
+                            <div class="waze-actions">
+                                <a href="https://ul.waze.com/ul?venue_id=176488594.1765148084.896612&overview=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" target="_blank" rel="noopener" class="waze-button">
+                                    <i class="ti-location-arrow"></i>
+                                    Abrir ubicación en Waze
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -529,16 +534,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <input name="email" type="email" class="form-control" placeholder="Correo electrónico (opcional)" value="<?php echo h($invitado['email'] ?? ''); ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <textarea name="restricciones_alimenticias" cols="30" rows="3" class="form-control" placeholder="Restricciones alimenticias o alergias"><?php echo h($invitado['restricciones_alimenticias'] ?? ''); ?></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <input name="cancion" type="text" class="form-control" placeholder="Canción que no puede faltar" value="<?php echo h($invitado['cancion'] ?? ''); ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-12">

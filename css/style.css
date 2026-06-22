@@ -1805,6 +1805,7 @@ body.offcanvason .oliven-nav-toggle {
     padding: 10px;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
     overflow: hidden;
+    position: relative;
 }
 .waze-map iframe {
     display: block;
@@ -1812,12 +1813,68 @@ body.offcanvason .oliven-nav-toggle {
     height: 430px;
     border: 0;
 }
+.waze-map-pin {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -100%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #BD945A;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    pointer-events: none;
+    z-index: 2;
+}
+.waze-map-pin:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    width: 18px;
+    height: 18px;
+    background: #BD945A;
+    transform: translateX(-50%) rotate(45deg);
+    z-index: -1;
+}
+.waze-actions {
+    text-align: center;
+    margin-top: 18px;
+}
+.waze-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    background: #33cc66;
+    color: #fff;
+    padding: 13px 24px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 10px 24px rgba(51, 204, 102, 0.22);
+}
+.waze-button:hover {
+    background: #BD945A;
+    color: #fff;
+}
 @media screen and (max-width: 768px) {
     .waze-map {
         padding: 6px;
     }
     .waze-map iframe {
         height: 330px;
+    }
+    .waze-button {
+        width: 100%;
+        padding: 13px 16px;
     }
 }
 .whenwhere .item .content h5 {

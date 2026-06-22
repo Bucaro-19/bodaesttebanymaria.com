@@ -71,7 +71,7 @@ git@github.com:Bucaro-19/bodaesttebanymaria.com.git
   - 2 tarjetas.
   - Fotos uniformes.
   - Sin repeticion.
-- Se agrego iframe de Waze para Finca La Ruca en "Cuándo y dónde".
+- Se agrego iframe de Waze para Finca La Ruca en "Cuándo y dónde", con marcador visual y boton para abrir la ubicacion en Waze.
 - Se cambio en tablet/desktop:
   - Foto de "Esperamos compartir este dia contigo" por `fecha.jpg`.
   - Fondo de RSVP por `ambiente.jpg`.
@@ -80,6 +80,9 @@ git@github.com:Bucaro-19/bodaesttebanymaria.com.git
   - Cuenta de ahorro `BI-1534460`.
   - Nombre: Lemus Chinchilla Estteban Jose O/ Rosito.
   - Boton para copiar solo `1534460`.
+- Se simplifico el formulario RSVP:
+  - Se quitaron los campos de restricciones alimenticias y cancion.
+  - Se mantiene mensaje para los novios.
 
 ## Configuracion del hosting
 
