@@ -73,16 +73,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 $form_message = 'Gracias, tu respuesta quedó guardada correctamente.';
 
                 if (defined('ADMIN_EMAIL') && ADMIN_EMAIL !== '' && strpos(ADMIN_EMAIL, 'example.com') === false) {
-                    $estado = $asiste === 1 ? 'Sí asistirá' : 'No asistirá';
-                    $subject = 'RSVP boda: ' . $invitado['nombre'];
-                    $body = "Nueva respuesta de boda\n\n";
+                    if ($asiste === 1) {
+                        $pase_txt = $cantidad === 1 ? '1 pase' : $cantidad . ' pases';
+                        $estado = 'Sí asistirá';
+                        $subject_raw = 'Confirmó: ' . $invitado['nombre'] . ' (' . $pase_txt . ')';
+                    } else {
+                        $estado = 'No asistirá';
+                        $subject_raw = 'No asistirá: ' . $invitado['nombre'];
+                    }
+                    $subject = '=?UTF-8?B?' . base64_encode($subject_raw) . '?=';
+                    $body = "Nueva respuesta en el RSVP de la boda\n\n";
                     $body .= "Invitado: {$invitado['nombre']}\n";
                     $body .= "Estado: {$estado}\n";
-                    $body .= "Cantidad: {$cantidad}\n";
+                    $body .= "Pases confirmados: {$cantidad}\n";
                     $body .= "Teléfono: {$telefono}\n";
                     $body .= "Email: {$email}\n";
-                    $body .= "Mensaje: {$mensaje}\n";
-                    $headers = 'From: ' . MAIL_FROM . "\r\n";
+                    $body .= "Mensaje: {$mensaje}\n\n";
+                    $body .= 'Ver todas las respuestas: ' . rtrim(SITE_URL, '/') . "/admin.php\n";
+                    $headers = 'From: Boda Estteban y Maria <' . MAIL_FROM . ">\r\n";
                     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
                     @mail(ADMIN_EMAIL, $subject, $body, $headers);
                 }
