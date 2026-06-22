@@ -265,14 +265,32 @@ $guest_result = $conn->query('SELECT * FROM invitados ORDER BY asiste IS NULL DE
     <title>Dashboard | Boda Estteban y Maria</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        function copyInvitation(nombre, token) {
-            const url = <?php echo json_encode(rtrim(SITE_URL, '/') . '/?invitado='); ?> + encodeURIComponent(token);
-            const displayName = nombre.trim() || 'invitado';
-            const message = `¡Hola! ${displayName} 💛\n\nCon mucha alegría queremos compartir contigo nuestra invitación de boda. Nos encantaría contar con tu compañía en un día tan especial.\n\nPuedes ver todos los detalles aquí:\n🔗 ${url}\n\nEsperamos de corazón que puedas acompañarnos.\nCon cariño,\nEstteban y María`;
-
+        function copyToClipboard(message) {
             navigator.clipboard.writeText(message).then(() => {
                 alert('Mensaje copiado al portapapeles.');
             });
+        }
+
+        function pasesLabel(pases, capitalized) {
+            const n = parseInt(pases, 10) || 1;
+            const word = n === 1 ? 'pase' : 'pases';
+            return n + ' ' + (capitalized ? word.charAt(0).toUpperCase() + word.slice(1) : word);
+        }
+
+        function copyInvitation(nombre, token, pases) {
+            const url = <?php echo json_encode(rtrim(SITE_URL, '/') . '/?invitado='); ?> + encodeURIComponent(token);
+            const displayName = nombre.trim() || 'invitado';
+            const message = `¡Hola! ${displayName} 💛\n\nCon mucha alegría queremos compartir contigo nuestra invitación de boda. Nos encantaría contar con tu compañía en un día tan especial.\n\nPuedes ver todos los detalles aquí:\n🔗 ${url}\n\nEsta invitación contiene ${pasesLabel(pases, true)}\n\nTe agradeceremos mucho si puedes confirmar tu asistencia a más tardar el 15 de septiembre, para ayudarnos con la organización de este día tan importante para nosotros.\n\nEsperamos de corazón que puedas acompañarnos.\n\nCon cariño,\nEstteban y María`;
+
+            copyToClipboard(message);
+        }
+
+        function copyReminder(nombre, token, pases) {
+            const url = <?php echo json_encode(rtrim(SITE_URL, '/') . '/?invitado='); ?> + encodeURIComponent(token);
+            const displayName = nombre.trim() || 'invitado';
+            const message = `¡Hola! ${displayName} 💛\n\nQueremos recordarte que nos encantaría contar con tu presencia en nuestra boda. Si aún no has confirmado tu asistencia, te agradeceremos mucho que puedas hacerlo antes del 15 de septiembre, para ayudarnos con la organización y planificación de este día tan especial.\n\nPuedes consultar nuevamente la invitación y confirmar aquí:\n🔗 ${url}\n\nRecuerda esta invitación contiene ${pasesLabel(pases, false)}\n\n¡Gracias por acompañarnos con tanto cariño en esta nueva etapa! Esperamos celebrar juntos muy pronto.\n\nCon cariño,\nEstteban y María`;
+
+            copyToClipboard(message);
         }
 
         function openEditModal(guest) {
@@ -439,7 +457,8 @@ $guest_result = $conn->query('SELECT * FROM invitados ORDER BY asiste IS NULL DE
                                 </td>
                                 <td class="p-4">
                                     <div class="flex justify-end gap-2">
-                                        <button type="button" onclick='copyInvitation(<?php echo json_encode($guest['nombre']); ?>, <?php echo json_encode($guest['token']); ?>)' class="bg-indigo-50 text-indigo-700 border border-indigo-200 rounded px-3 py-1.5 font-semibold">Copiar</button>
+                                        <button type="button" onclick='copyInvitation(<?php echo json_encode($guest['nombre']); ?>, <?php echo json_encode($guest['token']); ?>, <?php echo (int)$guest['pases']; ?>)' class="bg-indigo-50 text-indigo-700 border border-indigo-200 rounded px-3 py-1.5 font-semibold">Copiar</button>
+                                        <button type="button" onclick='copyReminder(<?php echo json_encode($guest['nombre']); ?>, <?php echo json_encode($guest['token']); ?>, <?php echo (int)$guest['pases']; ?>)' class="bg-sky-50 text-sky-700 border border-sky-200 rounded px-3 py-1.5 font-semibold">Recordatorio</button>
                                         <button type="button" onclick='openEditModal(<?php echo json_encode($guest, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>)' class="bg-amber-50 text-amber-700 border border-amber-200 rounded px-3 py-1.5 font-semibold">Editar</button>
                                         <form method="post" onsubmit="return confirm('Seguro que deseas borrar este invitado?');">
                                             <input type="hidden" name="action" value="delete_guest">
