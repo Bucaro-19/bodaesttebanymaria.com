@@ -30,5 +30,6 @@ jobs:
             **/.DS_Store
             config.php
             README.md
+            AGENTS.md
+            PROJECT_DESCRIPTION.md
             database.sql
-
