@@ -83,6 +83,19 @@ git@github.com:Bucaro-19/bodaesttebanymaria.com.git
 - Se simplifico el formulario RSVP:
   - Se quitaron los campos de restricciones alimenticias y cancion.
   - Se mantiene mensaje para los novios.
+- Se agrego carga masiva de invitados por CSV en `admin.php`:
+  - Detecta columnas por encabezado, genera token unico, limpia telefono y omite nombres duplicados.
+  - Helpers `clean_phone()` y `normalize_header()` en `includes/helpers.php`.
+  - Se cargaron 55 invitaciones (110 pases) desde un Excel.
+- Se agregaron correos automaticos (via `mail()` del hosting):
+  - Al invitado: confirmacion HTML con pases, fecha, lugar y botones de ubicacion (Waze y Google Maps), o mensaje breve si declina.
+  - A los organizadores (`ADMIN_EMAIL`, varios correos por coma): aviso por cada respuesta, con asunto claro y enlace al panel.
+- Se mejoro el flujo del RSVP:
+  - Patron Post/Redirect/Get para que recargar no reenvie el formulario ni duplique correos.
+  - Aviso cuando el invitado ya respondio (con su respuesta y fecha) y confirmacion al reenviar.
+  - Bloqueo del boton de envio ("Enviando...") para evitar envios multiples.
+- Se actualizaron los mensajes del admin:
+  - Botones "Copiar" (invitacion) y "Recordatorio" por invitado, con nombre, link y cantidad de pases, y fecha limite 15 de septiembre.
 
 ## Configuracion del hosting
 
@@ -96,6 +109,8 @@ La base de datos ya fue creada e importada segun el usuario:
 - Tabla `rsvp_historial`
 
 No escribir credenciales reales en archivos versionados. Usar `config.example.php` como referencia.
+
+Para los correos, el `config.php` del servidor debe definir `MAIL_FROM` (remitente) y `ADMIN_EMAIL` (destinatarios de los avisos; admite varios correos separados por coma). Estos correos personales viven solo en `config.php`, nunca en el repo publico.
 
 ## Flujo de uso
 
@@ -124,6 +139,6 @@ gh run list --limit 3
   - `post.html`
   - `mail.php`
   - imagenes viejas de plantilla en `images/`
-- Crear una forma de carga masiva de invitados por CSV.
-- Agregar exportacion CSV desde el admin.
+- Agregar exportacion CSV de respuestas desde el admin (la carga masiva por CSV ya esta hecha).
+- Revisar entregabilidad de correos (SPF/DKIM del dominio) si los avisos caen en spam.
 - Revisar visualmente en celulares reales despues de cada cambio de encuadre.
