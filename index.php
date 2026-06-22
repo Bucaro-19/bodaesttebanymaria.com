@@ -567,7 +567,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 mb-30">
-                            <br> <span class="oliven-title-meta">Con cariño</span>
+                         <!--   <br> <span class="oliven-title-meta">Con cariño</span>-->
                             <h2 class="oliven-title">Regalos</h2>
                         </div>
                         <div class="col-md-8">
