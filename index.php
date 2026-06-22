@@ -222,13 +222,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                             </div>
                         </div>
                         <div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
-                            <h3 class="oliven-story-title">Por todas las veces que nos preguntaron:<br>"¿Y pa' cuándo?"<br>¡Pues ya! Nos alegra contarles que ya tenemos respuesta.</h3>
-                            <p>Dios ha sido bueno con nosotros y nos ha guiado hasta este momento. Por eso, con mucha alegría, queremos invitarlos a acompañarnos el día en que uniremos nuestras vidas delante de Dios.</p>
-                            <p>Y como ninguna historia se celebra igual sin las personas que han sido parte de ella, nos encantará compartir este momento con ustedes.</p>
-                            <p><strong>Recepción solo para adultos.</strong> Aunque queremos mucho a los pequeños de la familia, en esta ocasión la celebración será exclusivamente para adultos. Gracias por comprender y por acompañarnos en este día tan especial.</p>
-                            <p><strong>Código de vestimenta: formal.</strong> La boda será en jardín y San Lucas en noviembre tiene fama de ponerse frío, así que no olviden traer algo para abrigarse. Y aunque el código de vestimenta es formal, creemos firmemente que nadie debería sufrir por unos zapatos incómodos. Los tenis también son bienvenidos.</p>
-                            <h4>"Y sobre todas estas cosas vestíos de amor, que es el vínculo perfecto."</h4>
-                            <p>Colosenses 3:14</p>
+                            <div class="story-editorial">
+                                <p class="se-leadin">Por todas las veces que nos preguntaron</p>
+                                <div class="se-script">¿Y pa' cuándo?</div>
+                                <p class="se-answer">¡Pues ya! Nos alegra contarles que ya tenemos respuesta.</p>
+
+                                <p class="se-body">Dios ha sido bueno con nosotros y nos ha guiado hasta este momento. Por eso, con mucha alegría, queremos invitarlos a acompañarnos el día en que uniremos nuestras vidas delante de Dios.</p>
+                                <p class="se-body">Y como ninguna historia se celebra igual sin las personas que han sido parte de ella, nos encantará compartir este momento con ustedes.</p>
+
+                                <div class="se-details">
+                                    <p><strong class="se-label">Recepción solo para adultos</strong>Aunque queremos mucho a los pequeños de la familia, en esta ocasión la celebración será exclusivamente para adultos. Gracias por comprender y por acompañarnos en este día tan especial.</p>
+                                    <p><strong class="se-label">Código de vestimenta · Formal</strong>La boda será en jardín y San Lucas en noviembre tiene fama de ponerse frío, así que no olviden traer algo para abrigarse.</p>
+                                    <p>Y aunque el código es formal, creemos firmemente que nadie debería sufrir por unos zapatos incómodos. Los tenis también son bienvenidos.</p>
+                                </div>
+
+                                <div class="se-verse">
+                                    <span class="se-dots"></span>
+                                    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#BD945A"/></svg>
+                                    <p>"Y sobre todas estas cosas vestíos de amor, que es el vínculo perfecto."</p>
+                                    <div class="se-cite">Colosenses 3:14</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
