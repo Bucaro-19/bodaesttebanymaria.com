@@ -10,7 +10,7 @@ $form_message = '';
 $form_status = '';
 
 if ($token_url !== '' && DB_AVAILABLE) {
-    $stmt = $conn->prepare('SELECT id, nombre, token, pases, telefono, email, asiste, cantidad_asistentes, mensaje, restricciones_alimenticias, cancion FROM invitados WHERE token = ? LIMIT 1');
+    $stmt = $conn->prepare('SELECT id, nombre, token, pases, telefono, email, asiste, cantidad_asistentes, mensaje, restricciones_alimenticias, cancion, fecha_respuesta FROM invitados WHERE token = ? LIMIT 1');
     $stmt->bind_param('s', $token_url);
     $stmt->execute();
     $invitado = $stmt->get_result()->fetch_assoc();
@@ -558,7 +558,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                                     Hola, <strong><?php echo h(first_display_name($invitado['nombre'])); ?></strong>.
                                     Esta invitación tiene <?php echo (int)$invitado['pases']; ?> pase<?php echo (int)$invitado['pases'] === 1 ? '' : 's'; ?> reservado<?php echo (int)$invitado['pases'] === 1 ? '' : 's'; ?> para ti.
                                 </p>
-                                <form class="rsvp__form" method="post" action="?invitado=<?php echo h($token_url); ?>#rsvp">
+
+                                <?php
+                                $ya_respondio = isset($invitado['asiste']);
+                                $fecha_resp_txt = '';
+                                if (!empty($invitado['fecha_respuesta'])) {
+                                    $ts = strtotime((string)$invitado['fecha_respuesta']);
+                                    if ($ts) {
+                                        $meses = [1 => 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                                        $fecha_resp_txt = (int)date('j', $ts) . ' de ' . $meses[(int)date('n', $ts)] . ' de ' . date('Y', $ts);
+                                    }
+                                }
+                                ?>
+                                <?php if ($ya_respondio && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
+                                    <?php
+                                    $cant = (int)($invitado['cantidad_asistentes'] ?? 0);
+                                    if ((int)$invitado['asiste'] === 1) {
+                                        $resumen = 'confirmaste que SÍ asistirás' . ($cant > 0 ? ' (' . $cant . ' persona' . ($cant === 1 ? '' : 's') . ')' : '');
+                                    } else {
+                                        $resumen = 'indicaste que no podrás asistir';
+                                    }
+                                    ?>
+                                    <div class="alert alert-warning" role="alert">
+                                        <strong>Ya habías enviado tu respuesta.</strong>
+                                        Según nuestros registros, <?php echo h($resumen); ?><?php echo $fecha_resp_txt !== '' ? ' el ' . h($fecha_resp_txt) : ''; ?>.
+                                        Si envías el formulario otra vez, <strong>actualizaremos tu respuesta</strong> con lo que selecciones ahora.
+                                    </div>
+                                <?php endif; ?>
+
+                                <form class="rsvp__form" method="post" action="?invitado=<?php echo h($token_url); ?>#rsvp"<?php echo $ya_respondio ? ' onsubmit="return confirm(\'Ya habías enviado tu respuesta. ¿Deseas volver a enviar el formulario para actualizarla?\');"' : ''; ?>>
                                     <input type="hidden" name="action" value="confirm_rsvp">
                                     <div class="row">
                                         <div class="col-md-12">
