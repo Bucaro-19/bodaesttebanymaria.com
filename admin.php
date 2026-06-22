@@ -267,8 +267,8 @@ $guest_result = $conn->query('SELECT * FROM invitados ORDER BY asiste IS NULL DE
     <script>
         function copyInvitation(nombre, token) {
             const url = <?php echo json_encode(rtrim(SITE_URL, '/') . '/?invitado='); ?> + encodeURIComponent(token);
-            const firstName = nombre.trim().split(/\s+/)[0] || 'invitado';
-            const message = `Hola ${firstName}, queremos compartirte nuestra invitacion de boda. Por favor confirma tu asistencia en este enlace personalizado: ${url}`;
+            const displayName = nombre.trim() || 'invitado';
+            const message = `¡Hola! ${displayName} 💛\n\nCon mucha alegría queremos compartir contigo nuestra invitación de boda. Nos encantaría contar con tu compañía en un día tan especial.\n\nPuedes ver todos los detalles aquí:\n🔗 ${url}\n\nEsperamos de corazón que puedas acompañarnos.\nCon cariño,\nEstteban y María`;
 
             navigator.clipboard.writeText(message).then(() => {
                 alert('Mensaje copiado al portapapeles.');

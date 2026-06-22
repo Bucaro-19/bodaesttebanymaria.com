@@ -586,7 +586,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                                     </div>
                                 <?php endif; ?>
 
-                                <form class="rsvp__form" method="post" action="?invitado=<?php echo h($token_url); ?>#rsvp"<?php echo $ya_respondio ? ' onsubmit="return confirm(\'Ya habías enviado tu respuesta. ¿Deseas volver a enviar el formulario para actualizarla?\');"' : ''; ?>>
+                                <form class="rsvp__form" method="post" action="?invitado=<?php echo h($token_url); ?>#rsvp" onsubmit="return handleRsvpSubmit(this, <?php echo $ya_respondio ? 'true' : 'false'; ?>);">
                                     <input type="hidden" name="action" value="confirm_rsvp">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -709,6 +709,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 document.execCommand('copy');
                 document.body.removeChild(input);
                 alert(successMessage);
+            }
+
+            function handleRsvpSubmit(form, yaRespondio) {
+                if (yaRespondio && !confirm('Ya habías enviado tu respuesta. ¿Deseas volver a enviar el formulario para actualizarla?')) {
+                    return false;
+                }
+
+                var btn = form.querySelector('input[type="submit"], button[type="submit"]');
+                if (btn) {
+                    btn.disabled = true;
+                    if (btn.tagName === 'INPUT') {
+                        btn.value = 'Enviando...';
+                    } else {
+                        btn.textContent = 'Enviando...';
+                    }
+                    // Red de seguridad: si por algo no recarga la página, reactiva el botón.
+                    setTimeout(function () {
+                        btn.disabled = false;
+                        if (btn.tagName === 'INPUT') {
+                            btn.value = 'ENVIAR CONFIRMACIÓN';
+                        }
+                    }, 8000);
+                }
+
+                return true;
             }
         </script>
     </div>
