@@ -315,6 +315,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                             </div>
                         </div>
                     </div>
+                    <div class="row mt-5">
+                        <div class="col-md-12">
+                            <div class="waze-map">
+                                <iframe src="https://embed.waze.com/iframe?zoom=16&lat=14.598513&lon=-90.657937&ct=livemap" width="600" height="450" allowfullscreen loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- See you -->
@@ -566,6 +573,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                         <div class="col-md-8">
                             <p>Su presencia será nuestro mejor regalo.</p>
                             <p>Sin embargo, si desean bendecirnos de una manera adicional, tendremos la opción de transferencia bancaria o sobres el día del evento.</p>
+                            <div class="bank-transfer-card">
+                                <div class="bank-transfer-copy">Transferencia bancaria</div>
+                                <div class="bank-transfer-title">Cuenta de ahorro BI-1534460</div>
+                                <div class="bank-transfer-name">Lemus Chinchilla Estteban Jose O/ Rosito</div>
+                                <button type="button" class="bank-copy-button" onclick="copyBankAccount('BI-1534460')">
+                                    <i class="ti-files"></i>
+                                    Copiar cuenta
+                                </button>
+                            </div>
                             <p>Esperamos compartir con ustedes una tarde llena de amor, alegría, buena comida y muchos recuerdos inolvidables.</p>
                             <p><strong>Con cariño,<br>Estteban & María</strong></p>
                         </div>
@@ -597,6 +613,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
         <script src="js/jquery.magnific-popup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
+        <script>
+            function copyBankAccount(account) {
+                var successMessage = 'Cuenta copiada: ' + account;
+
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(account).then(function () {
+                        alert(successMessage);
+                    });
+                    return;
+                }
+
+                var input = document.createElement('input');
+                input.value = account;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                alert(successMessage);
+            }
+        </script>
     </div>
 </body>
 </html>

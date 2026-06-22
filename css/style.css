@@ -1800,6 +1800,26 @@ body.offcanvason .oliven-nav-toggle {
 .whenwhere .item .content .tag a:hover {
     color: #BD945A;
 }
+.waze-map {
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+.waze-map iframe {
+    display: block;
+    width: 100%;
+    height: 430px;
+    border: 0;
+}
+@media screen and (max-width: 768px) {
+    .waze-map {
+        padding: 6px;
+    }
+    .waze-map iframe {
+        height: 330px;
+    }
+}
 .whenwhere .item .content h5 {
     font-size: 21px;
     margin-top: 10px;
@@ -1894,6 +1914,77 @@ body.offcanvason .oliven-nav-toggle {
 .gift img:hover {
     -webkit-filter: none;
     filter: none;
+}
+.bank-transfer-card {
+    background: #fff;
+    border-left: 8px solid #004b73;
+    padding: 28px 30px;
+    margin: 28px 0;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+}
+.bank-transfer-copy {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #BD945A;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.bank-transfer-title {
+    font-family: 'Nunito Sans', sans-serif;
+    color: #004b73;
+    font-size: 34px;
+    line-height: 1.18;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.bank-transfer-name {
+    font-family: 'Nunito Sans', sans-serif;
+    color: #5f5f5f;
+    font-size: 22px;
+    line-height: 1.35;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 22px;
+}
+.bank-copy-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #004b73;
+    color: #fff;
+    border: 0;
+    padding: 12px 20px;
+    margin-top: 24px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+.bank-copy-button:hover {
+    background: #BD945A;
+    color: #fff;
+}
+@media screen and (max-width: 768px) {
+    .bank-transfer-card {
+        border-left-width: 6px;
+        padding: 24px 20px;
+    }
+    .bank-transfer-title {
+        font-size: 24px;
+    }
+    .bank-transfer-name {
+        font-size: 16px;
+    }
+    .bank-copy-button {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 
