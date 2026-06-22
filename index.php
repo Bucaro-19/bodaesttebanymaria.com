@@ -304,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 </div>
             </div>
             <!-- See you -->
-            <div id="seeyou" class="seeyou section-padding bg-img bg-fixed" data-background="medios/web/ambiente.jpg">
+            <div id="seeyou" class="seeyou section-padding bg-img bg-fixed" data-background="medios/web/fecha.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="section-head col-md-12 text-center"> <span><i class="ti-heart"></i></span>
@@ -460,7 +460,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
                 </div>
             </div>
             <!-- Confirmation -->
-            <div id="rsvp" class="section-padding bg-img bg-fixed" data-background="images/banner-2.jpg">
+            <div id="rsvp" class="section-padding bg-img bg-fixed" data-background="medios/web/ambiente.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 offset-md-3 bg-white p-40"> <span class="oliven-title-meta text-center">¿Nos acompañas?</span>
