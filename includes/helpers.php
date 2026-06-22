@@ -48,3 +48,27 @@ function first_display_name(string $name): string
     return $parts[0];
 }
 
+function clean_phone(string $raw): string
+{
+    $raw = trim($raw);
+    if ($raw === '') {
+        return '';
+    }
+
+    $has_plus = strpos($raw, '+') !== false;
+    $digits = preg_replace('/\D+/', '', $raw) ?? '';
+
+    if ($digits === '') {
+        return '';
+    }
+
+    return $has_plus ? '+' . $digits : $digits;
+}
+
+function normalize_header(string $value): string
+{
+    $value = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value) ?: $value;
+
+    return strtolower(trim($value));
+}
+

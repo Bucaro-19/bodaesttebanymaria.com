@@ -99,6 +99,100 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if ($action === 'bulk_import') {
+        $content = '';
+        if (!empty($_FILES['csv']['tmp_name']) && is_uploaded_file($_FILES['csv']['tmp_name'])) {
+            $content = (string)file_get_contents($_FILES['csv']['tmp_name']);
+        } else {
+            $content = (string)($_POST['bulk_text'] ?? '');
+        }
+
+        // Quitar BOM de UTF-8 si viene de Excel
+        $content = preg_replace('/^\xEF\xBB\xBF/', '', $content) ?? $content;
+
+        $added = 0;
+        $skipped = 0;
+        $dups = 0;
+
+        if (trim($content) !== '') {
+            // Detectar separador: coma o punto y coma (Excel en español usa ;)
+            $first_line = strtok($content, "\r\n") ?: '';
+            $delimiter = (substr_count($first_line, ';') > substr_count($first_line, ',')) ? ';' : ',';
+
+            $fh = fopen('php://temp', 'r+');
+            fwrite($fh, $content);
+            rewind($fh);
+
+            $rows = [];
+            while (($cells = fgetcsv($fh, 0, $delimiter, '"', '\\')) !== false) {
+                $rows[] = $cells;
+            }
+            fclose($fh);
+
+            // Mapeo de columnas por encabezado (orden flexible)
+            $name_idx = null;
+            $pases_idx = null;
+            $phone_idx = null;
+
+            if (!empty($rows)) {
+                foreach ($rows[0] as $i => $cell) {
+                    $n = normalize_header((string)$cell);
+                    if ($name_idx === null && strpos($n, 'nombre') !== false) {
+                        $name_idx = $i;
+                    } elseif ($pases_idx === null && (strpos($n, 'invitad') !== false || strpos($n, 'pase') !== false || strpos($n, 'cantidad') !== false)) {
+                        $pases_idx = $i;
+                    } elseif ($phone_idx === null && strpos($n, 'tel') !== false) {
+                        $phone_idx = $i;
+                    }
+                }
+            }
+
+            if ($name_idx !== null) {
+                // Hay encabezado: lo saltamos
+                array_shift($rows);
+            } else {
+                // Sin encabezado: asumimos orden Nombre, Pases, Telefono
+                $name_idx = 0;
+                $pases_idx = 1;
+                $phone_idx = 2;
+            }
+
+            $check = $conn->prepare('SELECT id FROM invitados WHERE nombre = ? LIMIT 1');
+            $insert = $conn->prepare('INSERT INTO invitados (nombre, token, pases, telefono) VALUES (?, ?, ?, ?)');
+
+            foreach ($rows as $cells) {
+                $nombre = trim((string)($cells[$name_idx] ?? ''));
+                if ($nombre === '') {
+                    $skipped++;
+                    continue;
+                }
+
+                $pases_raw = $pases_idx !== null ? preg_replace('/\D+/', '', (string)($cells[$pases_idx] ?? '')) : '';
+                $pases = max(1, (int)($pases_raw === '' ? '1' : $pases_raw));
+                $telefono = $phone_idx !== null ? clean_phone((string)($cells[$phone_idx] ?? '')) : '';
+
+                $check->bind_param('s', $nombre);
+                $check->execute();
+                $exists = $check->get_result()->num_rows > 0;
+                if ($exists) {
+                    $dups++;
+                    continue;
+                }
+
+                $token = generate_token($conn, $nombre);
+                $insert->bind_param('ssis', $nombre, $token, $pases, $telefono);
+                $insert->execute();
+                $added++;
+            }
+
+            $check->close();
+            $insert->close();
+        }
+
+        header('Location: admin.php?imported=' . $added . '&skipped=' . $skipped . '&dups=' . $dups);
+        exit;
+    }
+
     if ($action === 'edit_guest') {
         $id = (int)($_POST['id'] ?? 0);
         $nombre = trim((string)($_POST['nombre'] ?? ''));
@@ -209,6 +303,19 @@ $guest_result = $conn->query('SELECT * FROM invitados ORDER BY asiste IS NULL DE
             <a href="?logout=1" class="inline-flex justify-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-semibold">Cerrar sesion</a>
         </div>
 
+        <?php if (isset($_GET['imported'])): ?>
+            <?php
+            $imp = max(0, (int)$_GET['imported']);
+            $skp = max(0, (int)($_GET['skipped'] ?? 0));
+            $dup = max(0, (int)($_GET['dups'] ?? 0));
+            ?>
+            <div class="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-lg p-4 mb-6 text-sm">
+                <strong><?php echo $imp; ?></strong> invitados agregados correctamente.
+                <?php if ($dup > 0): ?> · <strong><?php echo $dup; ?></strong> omitidos por nombre duplicado.<?php endif; ?>
+                <?php if ($skp > 0): ?> · <strong><?php echo $skp; ?></strong> filas vacías ignoradas.<?php endif; ?>
+            </div>
+        <?php endif; ?>
+
         <section class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
             <div class="bg-white rounded-lg border border-stone-200 p-5">
                 <p class="text-sm text-stone-500">Invitaciones</p>
@@ -249,6 +356,41 @@ $guest_result = $conn->query('SELECT * FROM invitados ORDER BY asiste IS NULL DE
                 </label>
                 <button class="bg-stone-900 hover:bg-stone-800 text-white rounded-md px-5 py-2 font-semibold">Agregar</button>
             </form>
+        </section>
+
+        <section class="bg-white rounded-lg border border-stone-200 p-5 mb-8">
+            <div class="flex items-center justify-between gap-4 mb-1">
+                <h2 class="text-lg font-bold">Carga masiva (CSV)</h2>
+                <button type="button" onclick="document.getElementById('bulk-box').classList.toggle('hidden')" class="text-sm text-stone-600 underline">Mostrar / ocultar</button>
+            </div>
+            <p class="text-sm text-stone-500 mb-4">Sube un archivo CSV o pega filas. El token de cada invitado se genera automáticamente. Se omiten los nombres que ya existan.</p>
+
+            <div id="bulk-box" class="hidden">
+                <form method="post" enctype="multipart/form-data" class="space-y-4" onsubmit="return confirm('Se cargarán los invitados nuevos del archivo o texto. ¿Continuar?');">
+                    <input type="hidden" name="action" value="bulk_import">
+
+                    <label class="block">
+                        <span class="block text-sm font-semibold mb-1">Archivo CSV</span>
+                        <input type="file" name="csv" accept=".csv,text/csv" class="w-full border border-stone-300 rounded-md px-3 py-2 bg-white">
+                    </label>
+
+                    <div class="text-center text-xs text-stone-400">— o pega las filas aquí —</div>
+
+                    <label class="block">
+                        <span class="block text-sm font-semibold mb-1">Pegar filas</span>
+                        <textarea name="bulk_text" rows="5" class="w-full border border-stone-300 rounded-md px-3 py-2 font-mono text-xs" placeholder="Nombre Invitación,Número de invitados,Número de teléfono&#10;Familia Pérez,2,55551234"></textarea>
+                    </label>
+
+                    <div class="bg-stone-50 border border-stone-200 rounded-md p-3 text-xs text-stone-600">
+                        <p class="font-semibold mb-1">Formato:</p>
+                        <p>Incluye la fila de encabezado. El sistema reconoce las columnas por su nombre: <strong>Nombre</strong>, <strong>Invitados/Pases</strong> y <strong>Teléfono</strong> (en cualquier orden). El teléfono es opcional.</p>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button class="bg-stone-900 hover:bg-stone-800 text-white rounded-md px-5 py-2 font-semibold">Importar</button>
+                    </div>
+                </form>
+            </div>
         </section>
 
         <section class="bg-white rounded-lg border border-stone-200 overflow-hidden">
