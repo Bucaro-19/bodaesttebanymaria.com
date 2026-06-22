@@ -106,6 +106,7 @@ sips -s format jpeg -s formatOptions 78 -Z 1800 medios/original.jpg --out medios
 - El encuadre del video hero en desktop es `object-position: 50% 50%`.
 - En mobile se ajusto solo el video con `object-position: 58% 50%`.
 - La seccion "Cuándo y dónde" usa 2 tarjetas uniformes en tablet/desktop.
+- La seccion "Cuándo y dónde" incluye iframe de Waze para Finca La Ruca.
 - Mobile mantiene comportamiento de una tarjeta/carrusel.
 - En tablet/desktop:
   - `#seeyou` usa `medios/web/fecha.jpg`.
@@ -124,12 +125,11 @@ Informacion principal:
 - Recepcion solo para adultos.
 - Codigo de vestimenta: formal.
 - Nota: boda en jardin, San Lucas puede ponerse frio; tenis tambien bienvenidos.
-- Regalos: presencia como mejor regalo, transferencia bancaria o sobres el dia del evento.
+- Regalos: presencia como mejor regalo, transferencia bancaria a Banco Industrial o sobres el dia del evento.
+- Cuenta publicada: Banco Industrial, cuenta de ahorro `BI-1534460`; el boton copia solo `1534460`.
 
 ## Pendientes conocidos
 
-- Confirmar si se agregaran datos bancarios concretos para regalos.
-- Confirmar si se agregara enlace de Waze/Google Maps.
 - Confirmar si se cambiara o comprimira mas el video hero; actualmente pesa alrededor de 29 MB.
 - Confirmar si se eliminan archivos plantilla no usados como `blog.html`, `post.html`, `mail.php` y secciones ocultas heredadas.
 - Revisar en dispositivos reales los encuadres desktop/tablet/mobile despues de cambios visuales.

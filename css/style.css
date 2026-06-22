@@ -1940,6 +1940,16 @@ body.offcanvason .oliven-nav-toggle {
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+.bank-transfer-account {
+    font-family: 'Nunito Sans', sans-serif;
+    color: #004b73;
+    font-size: 25px;
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
 .bank-transfer-name {
     font-family: 'Nunito Sans', sans-serif;
     color: #5f5f5f;
@@ -1977,6 +1987,9 @@ body.offcanvason .oliven-nav-toggle {
     }
     .bank-transfer-title {
         font-size: 24px;
+    }
+    .bank-transfer-account {
+        font-size: 20px;
     }
     .bank-transfer-name {
         font-size: 16px;

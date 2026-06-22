@@ -71,10 +71,15 @@ git@github.com:Bucaro-19/bodaesttebanymaria.com.git
   - 2 tarjetas.
   - Fotos uniformes.
   - Sin repeticion.
+- Se agrego iframe de Waze para Finca La Ruca en "Cuándo y dónde".
 - Se cambio en tablet/desktop:
   - Foto de "Esperamos compartir este dia contigo" por `fecha.jpg`.
   - Fondo de RSVP por `ambiente.jpg`.
   - Encuadre de contador para mostrar mejor las manos.
+- Se agrego tarjeta de Banco Industrial en "Regalos":
+  - Cuenta de ahorro `BI-1534460`.
+  - Nombre: Lemus Chinchilla Estteban Jose O/ Rosito.
+  - Boton para copiar solo `1534460`.
 
 ## Configuracion del hosting
 
@@ -110,8 +115,6 @@ gh run list --limit 3
 
 ## Pendientes o mejoras posibles
 
-- Agregar enlace de ubicacion en Waze o Google Maps.
-- Agregar datos bancarios especificos si los novios los desean.
 - Comprimir video hero con `ffmpeg` si el peso de 29 MB afecta carga en celular.
 - Eliminar archivos heredados que ya no se usan:
   - `blog.html`
@@ -121,4 +124,3 @@ gh run list --limit 3
 - Crear una forma de carga masiva de invitados por CSV.
 - Agregar exportacion CSV desde el admin.
 - Revisar visualmente en celulares reales despues de cada cambio de encuadre.
-
