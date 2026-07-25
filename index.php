@@ -28,16 +28,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'confi
         $form_status = 'danger';
         $form_message = 'Este enlace no es válido. Por favor confirma desde tu invitación personalizada.';
     } else {
-        $asiste = ($_POST['asiste'] ?? '') === 'si' ? 1 : 0;
+        $asistencia_input = (string)($_POST['asiste'] ?? '');
+        $asiste = $asistencia_input === 'si' ? 1 : 0;
         $pases = max(1, (int)$invitado['pases']);
-        $cantidad = $asiste === 1 ? max(1, min($pases, (int)($_POST['cantidad_asistentes'] ?? 1))) : 0;
+        $cantidad_solicitada = (int)($_POST['cantidad_asistentes'] ?? 0);
+        $cantidad = $asiste === 1 ? $cantidad_solicitada : 0;
         $telefono = trim((string)($_POST['telefono'] ?? ''));
         $email = trim((string)($_POST['email'] ?? ''));
         $mensaje = trim((string)($_POST['mensaje'] ?? ''));
         $restricciones = trim((string)($_POST['restricciones_alimenticias'] ?? ''));
         $cancion = trim((string)($_POST['cancion'] ?? ''));
 
-        if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!in_array($asistencia_input, ['si', 'no'], true)) {
+            $form_status = 'danger';
+            $form_message = 'Selecciona si podrás acompañarnos.';
+        } elseif ($asiste === 1 && ($cantidad_solicitada < 1 || $cantidad_solicitada > $pases)) {
+            $form_status = 'danger';
+            $form_message = 'Selecciona cuántos pases vas a utilizar.';
+        } elseif ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $form_status = 'danger';
             $form_message = 'Revisa el correo, parece que no tiene un formato válido.';
         } else {
@@ -603,7 +611,7 @@ if ($just_saved) {
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <select name="asiste" class="form-control" required>
+                                                <select name="asiste" class="form-control" required onchange="updateAttendanceSelection(this)">
                                                     <option value="">Selecciona una opción...</option>
                                                     <option value="si" <?php echo isset($invitado['asiste']) && (int)$invitado['asiste'] === 1 ? 'selected' : ''; ?>>Sí, asistiré</option>
                                                     <option value="no" <?php echo isset($invitado['asiste']) && (int)$invitado['asiste'] === 0 ? 'selected' : ''; ?>>No podré asistir</option>
@@ -614,12 +622,15 @@ if ($just_saved) {
                                             <div class="form-group">
                                                 <?php
                                                 $pases_disponibles = max(1, (int)$invitado['pases']);
-                                                $cantidad_actual = max(1, min($pases_disponibles, (int)($invitado['cantidad_asistentes'] ?? 1)));
+                                                $cantidad_actual = $_SERVER['REQUEST_METHOD'] === 'POST'
+                                                    ? max(0, min($pases_disponibles, (int)($_POST['cantidad_asistentes'] ?? 0)))
+                                                    : 0;
                                                 ?>
                                                 <div class="pass-select-card">
                                                     <label class="pass-select-label" for="cantidad_asistentes">¿Cuántos pases vas a confirmar?</label>
                                                     <div class="pass-select-control">
-                                                        <select id="cantidad_asistentes" name="cantidad_asistentes" class="form-control pass-select" required onchange="updatePassSelection(this)">
+                                                        <select id="cantidad_asistentes" name="cantidad_asistentes" class="form-control pass-select" data-total="<?php echo $pases_disponibles; ?>" required onchange="updatePassSelection(this)">
+                                                            <option value="" disabled <?php echo $cantidad_actual === 0 ? 'selected' : ''; ?>>Seleccione cuántos pases</option>
                                                             <?php for ($i = 1; $i <= $pases_disponibles; $i++): ?>
                                                                 <option value="<?php echo $i; ?>" <?php echo $cantidad_actual === $i ? 'selected' : ''; ?>>
                                                                     <?php echo $i; ?> persona<?php echo $i === 1 ? '' : 's'; ?>
@@ -629,7 +640,13 @@ if ($just_saved) {
                                                         <span class="pass-select-arrow" aria-hidden="true"><i class="ti-angle-down"></i></span>
                                                     </div>
                                                     <div class="pass-select-helper">
-                                                        <span id="pass-selection-summary"><?php echo $cantidad_actual; ?> de <?php echo $pases_disponibles; ?> pase<?php echo $pases_disponibles === 1 ? '' : 's'; ?> seleccionado<?php echo $cantidad_actual === 1 ? '' : 's'; ?></span>
+                                                        <span id="pass-selection-summary">
+                                                            <?php if ($cantidad_actual > 0): ?>
+                                                                <?php echo $cantidad_actual; ?> de <?php echo $pases_disponibles; ?> pase<?php echo $pases_disponibles === 1 ? '' : 's'; ?> seleccionado<?php echo $cantidad_actual === 1 ? '' : 's'; ?>
+                                                            <?php else: ?>
+                                                                Puedes confirmar hasta <?php echo $pases_disponibles; ?> pase<?php echo $pases_disponibles === 1 ? '' : 's'; ?>
+                                                            <?php endif; ?>
+                                                        </span>
                                                         <span>Toca para elegir</span>
                                                     </div>
                                                 </div>
@@ -743,10 +760,43 @@ if ($just_saved) {
                     return;
                 }
 
-                var selected = parseInt(select.value, 10) || 1;
-                var total = select.options.length || selected;
+                var total = parseInt(select.getAttribute('data-total'), 10) || Math.max(0, select.options.length - 1);
+                if (!select.value) {
+                    summary.textContent = 'Puedes confirmar hasta ' + total + ' pase' + (total === 1 ? '' : 's');
+                    return;
+                }
+
+                var selected = parseInt(select.value, 10);
                 summary.textContent = selected + ' de ' + total + ' pase' + (total === 1 ? '' : 's') + ' seleccionado' + (selected === 1 ? '' : 's');
             }
+
+            function updateAttendanceSelection(select) {
+                var passSelect = document.getElementById('cantidad_asistentes');
+                var summary = document.getElementById('pass-selection-summary');
+                if (!passSelect) {
+                    return;
+                }
+
+                var willNotAttend = select.value === 'no';
+                passSelect.disabled = willNotAttend;
+                passSelect.required = !willNotAttend;
+
+                if (willNotAttend) {
+                    passSelect.value = '';
+                    if (summary) {
+                        summary.textContent = 'No necesitas seleccionar pases';
+                    }
+                } else {
+                    updatePassSelection(passSelect);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var attendanceSelect = document.querySelector('select[name="asiste"]');
+                if (attendanceSelect) {
+                    updateAttendanceSelection(attendanceSelect);
+                }
+            });
 
             function handleRsvpSubmit(form, yaRespondio) {
                 if (yaRespondio && !confirm('Ya habías enviado tu respuesta. ¿Deseas volver a enviar el formulario para actualizarla?')) {

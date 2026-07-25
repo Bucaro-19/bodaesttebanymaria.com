@@ -377,6 +377,13 @@ input[type=radio]:checked:before {
     border-color: #BD945A;
     box-shadow: 0 0 0 3px rgba(189, 148, 90, 0.12);
 }
+.pass-select:invalid,
+.pass-select:disabled {
+    color: #777;
+}
+.pass-select option {
+    color: #111;
+}
 .pass-select-arrow {
     position: absolute;
     top: 50%;
