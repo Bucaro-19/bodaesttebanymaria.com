@@ -222,6 +222,7 @@ Informacion principal:
 - Regalos: presencia como mejor regalo, transferencia bancaria a Banco Industrial o sobres el dia del evento.
 - Cuenta publicada: Banco Industrial, cuenta de ahorro `BI-1534460`; el boton copia solo `1534460`.
 - El formulario RSVP visible pide asistencia, cantidad, telefono, correo opcional y mensaje. Ya no pide restricciones alimenticias ni cancion.
+- El campo de cantidad de pases usa el `select` real `cantidad_asistentes`, pero esta envuelto en una tarjeta visual (`pass-select-card`) con flecha, etiqueta y resumen dinamico para que sea claro que se puede tocar/cambiar.
 
 ## Archivos heredados y no usados
 

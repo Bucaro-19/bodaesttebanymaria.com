@@ -344,6 +344,78 @@ input[type=radio]:checked:before {
     background-color: #fff;
     border: 1px solid #ececec;
 }
+.pass-select-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(189, 148, 90, 0.45);
+    padding: 16px 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+.pass-select-label {
+    display: block;
+    margin-bottom: 10px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #BD945A;
+}
+.pass-select-control {
+    position: relative;
+}
+.pass-select {
+    width: 100%;
+    height: 52px;
+    background: #fff;
+    border: 1px solid #e5ded4;
+    padding: 0 54px 0 16px;
+    color: #111;
+    cursor: pointer;
+}
+.pass-select:focus {
+    border-color: #BD945A;
+    box-shadow: 0 0 0 3px rgba(189, 148, 90, 0.12);
+}
+.pass-select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 48px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: #BD945A;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+.pass-select-helper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.35;
+    color: #777;
+}
+.pass-select-helper span:first-child {
+    color: #111;
+    font-weight: 700;
+}
+@media screen and (max-width: 480px) {
+    .pass-select-card {
+        padding: 15px;
+    }
+    .pass-select-helper {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+    }
+}
 #message {
     font-family: 'Nunito Sans', sans-serif;
     height: 130px;

@@ -612,13 +612,27 @@ if ($just_saved) {
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <select name="cantidad_asistentes" class="form-control" required>
-                                                    <?php for ($i = 1; $i <= (int)$invitado['pases']; $i++): ?>
-                                                        <option value="<?php echo $i; ?>" <?php echo (int)($invitado['cantidad_asistentes'] ?? 1) === $i ? 'selected' : ''; ?>>
-                                                            <?php echo $i; ?> persona<?php echo $i === 1 ? '' : 's'; ?>
-                                                        </option>
-                                                    <?php endfor; ?>
-                                                </select>
+                                                <?php
+                                                $pases_disponibles = max(1, (int)$invitado['pases']);
+                                                $cantidad_actual = max(1, min($pases_disponibles, (int)($invitado['cantidad_asistentes'] ?? 1)));
+                                                ?>
+                                                <div class="pass-select-card">
+                                                    <label class="pass-select-label" for="cantidad_asistentes">¿Cuántos pases vas a confirmar?</label>
+                                                    <div class="pass-select-control">
+                                                        <select id="cantidad_asistentes" name="cantidad_asistentes" class="form-control pass-select" required onchange="updatePassSelection(this)">
+                                                            <?php for ($i = 1; $i <= $pases_disponibles; $i++): ?>
+                                                                <option value="<?php echo $i; ?>" <?php echo $cantidad_actual === $i ? 'selected' : ''; ?>>
+                                                                    <?php echo $i; ?> persona<?php echo $i === 1 ? '' : 's'; ?>
+                                                                </option>
+                                                            <?php endfor; ?>
+                                                        </select>
+                                                        <span class="pass-select-arrow" aria-hidden="true"><i class="ti-angle-down"></i></span>
+                                                    </div>
+                                                    <div class="pass-select-helper">
+                                                        <span id="pass-selection-summary"><?php echo $cantidad_actual; ?> de <?php echo $pases_disponibles; ?> pase<?php echo $pases_disponibles === 1 ? '' : 's'; ?> seleccionado<?php echo $cantidad_actual === 1 ? '' : 's'; ?></span>
+                                                        <span>Toca para elegir</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -721,6 +735,17 @@ if ($just_saved) {
                 document.execCommand('copy');
                 document.body.removeChild(input);
                 alert(successMessage);
+            }
+
+            function updatePassSelection(select) {
+                var summary = document.getElementById('pass-selection-summary');
+                if (!summary) {
+                    return;
+                }
+
+                var selected = parseInt(select.value, 10) || 1;
+                var total = select.options.length || selected;
+                summary.textContent = selected + ' de ' + total + ' pase' + (total === 1 ? '' : 's') + ' seleccionado' + (selected === 1 ? '' : 's');
             }
 
             function handleRsvpSubmit(form, yaRespondio) {

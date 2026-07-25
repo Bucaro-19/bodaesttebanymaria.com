@@ -122,6 +122,7 @@ git@github.com:Bucaro-19/bodaesttebanymaria.com.git
 - Se cambio en tablet/desktop la foto de "Esperamos compartir este dia contigo" por `fecha.jpg`, el fondo de RSVP por `ambiente.jpg` y el encuadre del contador para mostrar mejor las manos.
 - Se agrego tarjeta de Banco Industrial en "Regalos": cuenta de ahorro `BI-1534460`, nombre `Lemus Chinchilla Estteban Jose O/ Rosito`, y boton para copiar solo `1534460`.
 - Se simplifico el formulario RSVP: se quitaron restricciones alimenticias y cancion; se mantiene mensaje para los novios.
+- Se hizo mas claro el selector de cantidad de pases: ahora se ve como una tarjeta seleccionable con flecha, texto de ayuda y resumen dinamico.
 - Se agrego carga masiva de invitados por CSV en `admin.php`: detecta columnas por encabezado, genera token unico, limpia telefono y omite nombres duplicados.
 - Se agregaron helpers `clean_phone()` y `normalize_header()` en `includes/helpers.php`.
 - Se cargaron 55 invitaciones (110 pases) desde un Excel.
@@ -157,6 +158,7 @@ Formulario RSVP visible actualmente:
 - Telefono.
 - Correo opcional.
 - Mensaje para los novios.
+- El campo de cantidad de asistentes mantiene un dropdown real, pero visualmente se presenta como selector destacado para que los invitados entiendan que pueden cambiarlo.
 
 Ya no muestra:
 
